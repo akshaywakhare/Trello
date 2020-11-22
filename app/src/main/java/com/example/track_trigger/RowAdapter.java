@@ -14,10 +14,10 @@ import java.util.List;
 
 //import android.support.v4.content.ContextCompat;
 
-public class RowAdapter extends ArrayAdapter<Comment> {
+public class RowAdapter extends ArrayAdapter<Commentr> {
 
     //Comment est la liste des models à afficher
-    public RowAdapter(Context context, List<Comment> tweets) {
+    public RowAdapter(Context context, List<Commentr> tweets) {
         super(context, 0, tweets);
     }
 
@@ -37,7 +37,7 @@ public class RowAdapter extends ArrayAdapter<Comment> {
             convertView.setTag(viewHolder);
         }
 
-        Comment tweet = getItem(position);
+        Commentr tweet = getItem(position);
 
         if(tweet.getImportant().equals("y")) {
             viewHolder.text.setTextColor(Color.parseColor("#FF0000"));
@@ -61,14 +61,14 @@ public class RowAdapter extends ArrayAdapter<Comment> {
     }
 }
 
-class Comment {
+class Commentr {
     private int color;
     private String pseudo;
     private String text;
     private String important;
 
 
-    public Comment(int color, String pseudo, String text, String important) {
+    public Commentr(int color, String pseudo, String text, String important) {
         this.color = color;
         this.pseudo = pseudo;
         this.text = text;

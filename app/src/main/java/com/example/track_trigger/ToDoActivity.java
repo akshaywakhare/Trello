@@ -3,7 +3,7 @@ package com.example.track_trigger;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,19 +22,18 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.w3c.dom.Comment;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static android.graphics.Color.*;
-
-public class ToDoActivity extends AppCompatActivity {
+import static android.graphics.Color.BLACK;
+import static android.graphics.Color.argb;
+public class ToDoActivity<t> extends AppCompatActivity {
 
     private ListView mListView;
-    private List<Comment> mTweets;
-    private Comment mComment;
+    private List<Commentr> mTweets;
+    private Commentr mComment;
 
     private TextView mTextStatus;
 
@@ -132,7 +132,7 @@ public class ToDoActivity extends AppCompatActivity {
         alert.setMessage(R.string.addOne_message);
 
         // Create TextView
-        final EditText name = new EditText (this);
+        final EditText name = new EditText(this);
         name.setHint(R.string.addOne_name);
 
         final EditText text = new EditText(this);
@@ -161,17 +161,18 @@ public class ToDoActivity extends AppCompatActivity {
                 // Random color & add to list
                 Random rnd = new Random();
                 int color = argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
-
+                String t = text.getText().toString();
                 String important;
-                if(importantCheck.isChecked()) {
+                if (importantCheck.isChecked()) {
                     important = "y";
-                }
-                else {
+                } else {
                     important = "n";
                 }
 
-                if(name.length() > 0 || text.length() > 0) {
-                    mComment = new Comment(color, name.getText().toString(), text.getText().toString(), important );
+                if (name.length() > 0 || text.length() > 0) {
+                        mComment = new Commentr(color, name.getText().toString(), text.getText().toString(), important );
+                    //String tr=text.getText().toString();
+//                    do (name.getText().toString(),tr,important)
                     AddItem(mComment);
                     refreshList();
                 }
@@ -185,6 +186,7 @@ public class ToDoActivity extends AppCompatActivity {
         });
         alert.show();
     }
+
 
     private void modifyOne(final int position) {
 
@@ -224,6 +226,7 @@ public class ToDoActivity extends AppCompatActivity {
 
 
         alert.setPositiveButton(R.string.app_modify, new DialogInterface.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             public void onClick(DialogInterface dialog, int whichButton) {
 
                 String important;
@@ -235,7 +238,7 @@ public class ToDoActivity extends AppCompatActivity {
                 }
 
                 if(name.length() > 0 || text.length() > 0) {
-                    mComment = new Comment(mComment.getColor(), name.getText().toString(), text.getText().toString(), important);
+                    mComment = new Commentr(mComment.getColor(), name.getText().toString(), text.getText().toString(), important);
                     ModifyItem(position, mComment);
                     refreshList();
                 }
@@ -254,7 +257,7 @@ public class ToDoActivity extends AppCompatActivity {
 
     // LIST REFRESH
     private void refreshList() {
-        RowAdapter adapter = new RowAdapter(MainActivity.this, mTweets);
+        RowAdapter adapter = new RowAdapter(ToDoActivity.this, mTweets);
         mListView.setAdapter(adapter);
 
         if(mTweets.size() > 0 ) {
@@ -266,7 +269,7 @@ public class ToDoActivity extends AppCompatActivity {
     }
 
     // GENERATE INITIAL DATA
-    private List<Comment> generateData() {
+    private List<Commentr> generateData() {
         mTweets = new ArrayList<>();
         SharedPreferences myPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         String myData = myPrefs.getString("myTodoData",null);
@@ -280,7 +283,7 @@ public class ToDoActivity extends AppCompatActivity {
                     String data  = jsonArray.getString(i);
                     String[] splitData = data.split("\\.");
 
-                    mTweets.add(new Comment(Integer.parseInt(splitData[0]), splitData[1], splitData[2], splitData[3]));
+                    mTweets.add(new Commentr(Integer.parseInt(splitData[0]), splitData[1], splitData[2], splitData[3]));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -288,7 +291,7 @@ public class ToDoActivity extends AppCompatActivity {
         }
         else
         {
-            mComment = new Comment(BLACK, "Florent", getString(R.string.app_example), "y");
+            mComment = new Commentr(BLACK, "Florent", getString(R.string.app_example), "y");
             AddItem(mComment);
         }
 
@@ -296,7 +299,8 @@ public class ToDoActivity extends AppCompatActivity {
     }
 
     // JSON SAVE & ACTIONS
-    private void ModifyItem(int position, Comment e) {
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void ModifyItem(int position, Commentr e) {
         SharedPreferences myPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         String myData = myPrefs.getString("myTodoData",null);
 
@@ -317,7 +321,7 @@ public class ToDoActivity extends AppCompatActivity {
         editor.apply();
     }
 
-    private void AddItem(Comment e) {
+    private void AddItem(Commentr e) {
         SharedPreferences myPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         String myData = myPrefs.getString("myTodoData",null);
 
@@ -350,7 +354,9 @@ public class ToDoActivity extends AppCompatActivity {
         try {
             jsonArray = new JSONArray(myData);
 
-            jsonArray.remove(pos);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                jsonArray.remove(pos);
+            }
             mTweets.remove(pos);
         } catch (JSONException e1) {
             e1.printStackTrace();

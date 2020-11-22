@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
 
         alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                // Canceled.
+
+                new Calendar();
             }
         });
         alert.show();
