@@ -40,6 +40,7 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
     private TextInputEditText password;
     private AppCompatTextView appCompatTextViewLoginLink;
     private static int c=0;
+    String phone;
     FirebaseFirestore db ;
     private FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -48,6 +49,8 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        Bundle bundle=getIntent().getExtras();
+        phone=bundle.getString("phone");
         db=FirebaseFirestore.getInstance();
         relative = (RelativeLayout) findViewById(R.id.relative);
         textInputLayoutName=(TextInputLayout) findViewById(R.id.textInputLayoutName) ;
@@ -91,8 +94,9 @@ public class Register extends AppCompatActivity implements AdapterView.OnItemSel
                                                 dashboard.put("Groceries","0");
                                                 dashboard.put("To-do List","0");
                                                 dashboard.put("Meetings","0");
+                                                dashboard.put("Tasks","0");
                                                 User user = new User(textInputEditTextName.getText().toString(),email.getText().toString(),
-                                                        password.getText().toString(), temp);
+                                                        password.getText().toString(), temp,phone);
                                                 db.collection("Users").document(email.getText().toString()).set(user);
                                                 DocumentReference ref=db.collection("Users").document(email.getText().toString());
                                                 ref.update("Dashboard",dashboard);

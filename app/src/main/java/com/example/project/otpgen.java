@@ -74,7 +74,9 @@ public class otpgen extends AppCompatActivity{
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            startActivity(new Intent(otpgen.this,Register.class));
+                            Intent intent =new Intent(otpgen.this,Register.class);
+                            intent.putExtra("phone",phoneNumber);
+                            startActivity(intent);
                             finish();
                         } else {
                             Toast.makeText(otpgen.this,"Incorrect OTP",Toast.LENGTH_SHORT).show();

@@ -92,7 +92,7 @@ public class Todo extends AppCompatActivity implements TimePickerDialog.OnTimeSe
                                             int h=Integer.parseInt(hour);
                                             int min=Integer.parseInt(minute);
                                             Calendar c = Calendar.getInstance();
-                                            c.set(Calendar.HOUR_OF_DAY, h);
+                                            c.set(Calendar.HOUR_OF_DAY, h-1);
                                             c.set(Calendar.MINUTE, min);
                                             c.set(Calendar.SECOND, 0);
                                             updateTimeText(c);
@@ -187,7 +187,7 @@ public class Todo extends AppCompatActivity implements TimePickerDialog.OnTimeSe
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
         Calendar c = Calendar.getInstance();
-        c.set(Calendar.HOUR_OF_DAY, hourOfDay);
+        c.set(Calendar.HOUR_OF_DAY, hourOfDay-1);
         c.set(Calendar.MINUTE, minute);
         c.set(Calendar.SECOND, 0);
         updateTimeText(c);

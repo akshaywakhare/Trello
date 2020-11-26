@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.view.View;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
+
+import com.google.android.gms.common.api.OptionalPendingResult;
+import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.snackbar.Snackbar;
@@ -36,7 +39,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-public class LoginActivity extends AppCompatActivity implements  OnConnectionFailedListener {
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
     private final AppCompatActivity activity = LoginActivity.this;
     private RelativeLayout relativeLayout;
     private TextInputLayout textInputLayoutEmail;
@@ -65,17 +68,10 @@ public class LoginActivity extends AppCompatActivity implements  OnConnectionFai
         authStateListener = new FirebaseAuth.AuthStateListener(){
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                // Get signedIn user
                 FirebaseUser user = firebaseAuth.getCurrentUser();
-
-                //if user is signed in, we call a helper method to save the user details to Firebase
                 if (user != null) {
-                    // User is signed in
-                    // you could place other firebase code
-                    //logic to save the user details to Firebase
                     Log.d(TAG, "onAuthStateChanged:signed_in:" + user.getUid());
                 } else {
-                    // User is signed out
                     Log.d(TAG, "onAuthStateChanged:signed_out");
                 }
             }
@@ -102,6 +98,18 @@ public class LoginActivity extends AppCompatActivity implements  OnConnectionFai
                                             intent.putExtra("email",textInputEditTextEmail.getText().toString());
                                             startActivity(intent);
                                         }
+                                        else if(profession.equalsIgnoreCase("Teacher"))
+                                        {
+                                            Intent intent = new Intent(activity,Teacher.class);
+                                            intent.putExtra("email",textInputEditTextEmail.getText().toString());
+                                            startActivity(intent);
+                                        }
+                                        else if(profession.equalsIgnoreCase("Businessman"))
+                                        {
+                                            Intent intent = new Intent(activity,Business.class);
+                                            intent.putExtra("email",textInputEditTextEmail.getText().toString());
+                                            startActivity(intent);
+                                        }
                                     }
                                 });
                                         }
@@ -112,7 +120,7 @@ public class LoginActivity extends AppCompatActivity implements  OnConnectionFai
 
 
         GoogleSignInOptions gso =  new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("1034930123207-tsemde2ltmvgndvs25bfa9o902k7r8li.apps.googleusercontent.com")//you can also use R.string.default_web_client_id
+                .requestIdToken("1034930123207-beu8upm66s6f0p1ltva1a9k8nemri163.apps.googleusercontent.com")//you can also use R.string.default_web_client_id
                 .requestEmail()
                 .build();
         googleApiClient=new GoogleApiClient.Builder(this)
@@ -153,9 +161,7 @@ public class LoginActivity extends AppCompatActivity implements  OnConnectionFai
     }
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -164,7 +170,6 @@ public class LoginActivity extends AppCompatActivity implements  OnConnectionFai
             handleSignInResult(result);
         }
     }
-
     private void handleSignInResult(GoogleSignInResult result){
         if(result.isSuccess()){
             GoogleSignInAccount account = result.getSignInAccount();
@@ -181,7 +186,6 @@ public class LoginActivity extends AppCompatActivity implements  OnConnectionFai
         }
     }
     private void firebaseAuthWithGoogle(AuthCredential credential){
-
         firebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -196,30 +200,37 @@ public class LoginActivity extends AppCompatActivity implements  OnConnectionFai
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
-
                     }
                 });
     }
-
-
-
-
     private void gotoProfile(){
         DocumentReference ref=db.collection("Users").document(email);
-        ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>(){
+        ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot){
-                if(documentSnapshot.exists())
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot data = task.getResult();
+                User user=data.toObject(User.class);
+                String profession = user.getprofession();
+                if(profession.equalsIgnoreCase("Homemaker"))
                 {
-                    String profession=documentSnapshot.getString("profession");
-                    if(profession.equalsIgnoreCase("Homemaker"))
-                    {
-                        Intent intent = new Intent(activity, Register.class);
-                        intent.putExtra("name",name);
-                        startActivity(intent);
-                    }
+                    Intent intent = new Intent(activity,Homemaker.class);
+                    intent.putExtra("email",email);
+                    startActivity(intent);
                 }
-            }});
+                else if(profession.equalsIgnoreCase("Teacher"))
+                {
+                    Intent intent = new Intent(activity,Teacher.class);
+                    intent.putExtra("email",textInputEditTextEmail.getText().toString());
+                    startActivity(intent);
+                }
+                else if(profession.equalsIgnoreCase("Businessman"))
+                {
+                    Intent intent = new Intent(activity,Business.class);
+                    intent.putExtra("email",textInputEditTextEmail.getText().toString());
+                    startActivity(intent);
+                }
+            }
+        });
         finish();
     }
     @Override
@@ -230,7 +241,6 @@ public class LoginActivity extends AppCompatActivity implements  OnConnectionFai
         }
         firebaseAuth.addAuthStateListener(authStateListener);
     }
-
     @Override
     protected void onStop() {
         super.onStop();

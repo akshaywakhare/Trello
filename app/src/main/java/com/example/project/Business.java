@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Homemaker extends AppCompatActivity {
+public class Business extends AppCompatActivity {
     private List<MyList>myLists;
     private MyAdapter adapter;
     private FloatingActionButton add;
@@ -44,7 +44,7 @@ public class Homemaker extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_homemaker);
+        setContentView(R.layout.activity_business);
         Bundle bundle=getIntent().getExtras();
         email=bundle.getString("email");
         name=bundle.getString("name");
@@ -92,10 +92,10 @@ public class Homemaker extends AppCompatActivity {
         add.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                AlertDialog.Builder builder = new AlertDialog.Builder(Homemaker.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(Business.this);
                 builder.setTitle("Name of the component");
 
-                View viewInflated = LayoutInflater.from(Homemaker.this).inflate(R.layout.dialogbox, null);
+                View viewInflated = LayoutInflater.from(Business.this).inflate(R.layout.dialogbox, null);
 // Set up the input
                 final EditText input = (EditText) viewInflated.findViewById(R.id.inputname);
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
