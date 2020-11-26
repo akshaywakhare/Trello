@@ -1,22 +1,11 @@
 <resources>
-    <string name="app_name" translatable="false">ToDo List</string>
-    <string name="app_logo" translatable="false">logo</string>
-    <string name="app_colortext" translatable="false">color</string>
-    <string name="deleteOne_title">Delete item.</string>
-    <string name="deleteOne_message">" Are you sure you want to delete the selected item ?"</string>
-    <string name="app_yes">Yes</string>
-    <string name="app_no">No</string>
-    <string name="app_ok" translatable="false">Ok</string>
-    <string name="app_modify">Modify</string>
-    <string name="app_cancel">Cancel</string>
-    <string name="addOne_title">Add one task.</string>
-    <string name="addOne_message">Complete the information to add a task.</string>
-    <string name="addOne_name">Name...</string>
-    <string name="addOne_task">Task...</string>
-    <string name="addOne_important">Important task</string>
-    <string name="modifyOne_title">Modify task.</string>
-    <string name="modifyOne_message">Complete the information to modify this task.</string>
-    <string name="app_listNoEmpty">Here is your list of tasks :</string>
-    <string name="app_listEmpty">The list doesn\'t contain any element !</string>
-    <string name="app_example">Go get some coffee !</string>
+    <string name="app_name">project</string>
+    <string name="already_a_member">Already a member</string>
+    <string name="login">login</string>
+    <string name="not_a_member">Not a member</string>
+    <string name="password">password</string>
+    <string name="username">username</string>
+    <string name="open">open</string>
+    <string name="close">close</string>
+    <string name="help">Simply add, edit and delete your reminders. If you have any questions, go have a beer.</string>
 </resources>
