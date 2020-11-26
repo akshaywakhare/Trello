@@ -1,10 +1,6 @@
 package com.example.project;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,12 +8,15 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -30,16 +29,10 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import androidx.core.content.ContextCompat;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
@@ -47,6 +40,7 @@ public class General_list extends AppCompatActivity {
     private List<MyList1> myLists;
     private MyAdapter1 adapter;
     private FloatingActionButton newadd;
+    private Button cal;
     RecyclerView recyclerView;
     private String mText = "";
     FirebaseFirestore db;
@@ -62,6 +56,7 @@ public class General_list extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(General_list.this));
         newadd = (FloatingActionButton) findViewById(R.id.newadd);
+        cal = (Button) findViewById(R.id.cal);
         myLists = new ArrayList<>();
         Bundle bundle=getIntent().getExtras();
         email=bundle.getString("email");
@@ -103,7 +98,7 @@ public class General_list extends AppCompatActivity {
                 }
             }
         });
-        newadd.setOnClickListener(new View.OnClickListener() {
+        newadd.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(General_list.this);
@@ -194,7 +189,7 @@ public class General_list extends AppCompatActivity {
                             }}
                     });
                     Snackbar.make(recyclerView, deleted, Snackbar.LENGTH_LONG)
-                            .setAction("Undo", new View.OnClickListener() {
+                            .setAction("Undo", new OnClickListener() {
 
                                 @Override
                                 public void onClick(View v) {
@@ -271,4 +266,11 @@ public class General_list extends AppCompatActivity {
         });
         return super.onCreateOptionsMenu(menu);
     }
+
+    //View.OnClickListener( ){}
+    //            new View.OnClickListener() {
+//        @Override
+//        public void onClick(View view) {
+//        }
+//    }
 }

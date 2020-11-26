@@ -48,6 +48,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             tools:ignore="MissingConstraints" />
 
+        <Button
+            android:id="@+id/cal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calendar"
+            tools:layout_editor_absoluteX="29dp"
+            tools:layout_editor_absoluteY="635dp" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

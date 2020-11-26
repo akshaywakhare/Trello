@@ -1,4 +1,5 @@
 package com.example.loginregister;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.widget.NestedScrollView;
-
+import com.example.project.R;
 import com.example.loginregister.helpers.InputValidation;
 import com.example.loginregister.sql.DatabaseHelper;
 import com.google.android.material.snackbar.Snackbar;
@@ -36,6 +37,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     /**
      * This method is to initialize views
      */
+    @SuppressLint("WrongViewCast")
     private void initViews() {
         nestedScrollView = (NestedScrollView) findViewById(R.id.nestedScrollView);
         textInputLayoutEmail = (TextInputLayout) findViewById(R.id.textInputLayoutEmail);

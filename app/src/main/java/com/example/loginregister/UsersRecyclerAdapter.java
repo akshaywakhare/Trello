@@ -9,8 +9,10 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.loginregister.model.User;
+import com.example.project.R;
 
 import java.util.List;
+
 public class UsersRecyclerAdapter extends RecyclerView.Adapter<UsersRecyclerAdapter.UserViewHolder> {
     private List<User> listUsers;
     public UsersRecyclerAdapter(List<User> listUsers) {

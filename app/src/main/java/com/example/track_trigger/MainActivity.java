@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.project.R;
 
 public class MainActivity extends AppCompatActivity {
     private FloatingActionButton clearButton;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                new ToDoActivity();
+
             }
         });
 

@@ -1,8 +1,6 @@
 package com.example.project;
-import android.app.Activity;
 import android.app.PendingIntent;
 import android.app.AlarmManager;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -19,7 +17,6 @@ import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -212,16 +209,14 @@ public class DashBoardActivity extends AppCompatActivity implements TasksFragmen
                     case R.id.dashboard:
                         Log.d(TAG, "Choosing tasks");
                         break;
-                    case R.id.help:
+                    case R.id.About:
                         fragmentClass = HelpFragment.class;
                         Log.d(TAG, "Choosing help");
                         //Intent intent = new Intent(getBaseContext(), HelpActivity.class);
                         //DashBoardActivity.this.startActivity(intent);
                         break;
-                    case R.id.exit:
-                        finish();
-                        moveTaskToBack(true);
-                        break;
+
+
                 }
                 switchFragment(fragmentClass);
 

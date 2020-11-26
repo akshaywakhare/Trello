@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="textViewEmail" type="id" />
+    <item name="textViewPassword" type="id" />
+    <item name="textInputLayoutConfirmPassword" type="id"/>
+    <item name="textInputEditTextConfirmPassword" type="id"/>
+</resources>

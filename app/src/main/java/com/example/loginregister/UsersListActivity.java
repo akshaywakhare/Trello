@@ -11,9 +11,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.loginregister.model.User;
 import com.example.loginregister.sql.DatabaseHelper;
+import com.example.project.R;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public class UsersListActivity extends AppCompatActivity {
     private AppCompatActivity activity = UsersListActivity.this;
     private AppCompatTextView textViewName;
