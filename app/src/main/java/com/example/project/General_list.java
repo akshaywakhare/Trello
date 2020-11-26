@@ -1,22 +1,24 @@
 package com.example.project;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,18 +31,24 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import androidx.core.content.ContextCompat;
 
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 public class General_list extends AppCompatActivity {
     private List<MyList1> myLists;
     private MyAdapter1 adapter;
+    private MyAdapter1.RecyclerViewClickListener listener;
     private FloatingActionButton newadd;
-    private Button cal;
     RecyclerView recyclerView;
     private String mText = "";
     FirebaseFirestore db;
@@ -56,7 +64,6 @@ public class General_list extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(General_list.this));
         newadd = (FloatingActionButton) findViewById(R.id.newadd);
-        cal = (Button) findViewById(R.id.cal);
         myLists = new ArrayList<>();
         Bundle bundle=getIntent().getExtras();
         email=bundle.getString("email");
@@ -87,7 +94,7 @@ public class General_list extends AppCompatActivity {
                                             for (Map.Entry<String, String> entry : comp.entrySet()) {
                                                 myLists.add(new MyList1(entry.getKey(), entry.getValue()));
                                             }
-                                            adapter = new MyAdapter1(myLists, getApplicationContext(), email, des);
+                                            adapter = new MyAdapter1(myLists, getApplicationContext(), email, des,listener);
                                             recyclerView.setAdapter(adapter);
                                         }
                                     }}
@@ -98,7 +105,8 @@ public class General_list extends AppCompatActivity {
                 }
             }
         });
-        newadd.setOnClickListener(new OnClickListener() {
+        setOnClickListener();
+        newadd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(General_list.this);
@@ -116,7 +124,7 @@ public class General_list extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         mText = input.getText().toString();
                         myLists.add(new MyList1(mText));
-                        adapter = new MyAdapter1(myLists, getApplicationContext(),email,des);
+                        adapter = new MyAdapter1(myLists, getApplicationContext(),email,des,listener);
                         recyclerView.setAdapter(adapter);
                         ref.update("Components."+mText,"0");
                         ref1.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -189,7 +197,7 @@ public class General_list extends AppCompatActivity {
                             }}
                     });
                     Snackbar.make(recyclerView, deleted, Snackbar.LENGTH_LONG)
-                            .setAction("Undo", new OnClickListener() {
+                            .setAction("Undo", new View.OnClickListener() {
 
                                 @Override
                                 public void onClick(View v) {
@@ -266,11 +274,35 @@ public class General_list extends AppCompatActivity {
         });
         return super.onCreateOptionsMenu(menu);
     }
-
-    //View.OnClickListener( ){}
-    //            new View.OnClickListener() {
-//        @Override
-//        public void onClick(View view) {
-//        }
-//    }
+    private void setOnClickListener() {
+        listener=new MyAdapter1.RecyclerViewClickListener() {
+            @Override
+            public void OnClick(View v, int position) {
+                if(des.equalsIgnoreCase("Groceries"))
+                {
+                    Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://www.amazon.in/" +
+                            "Gourmet-Specialty-Foods/b/?ie=UTF8&node=2454178031&ref_=topnav_storetab_topnav_storetab_gourmet"));
+                    startActivity(intent);
+                }
+                else if(des.equalsIgnoreCase("Furniture"))
+                {
+                    Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://www.amazon.in/gp/browse.html?node=1380441031&" +
+                            "ref_=nav_em_sbc_hk_furniture_0_2_12_5"));
+                    startActivity(intent);
+                }
+                else if(des.equalsIgnoreCase("Kitchen Appliances"))
+                {
+                    Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://www.amazon.in/gp/browse.html?node=4951860031&" +
+                            "ref_=nav_em_sbc_tvelec_kitchen_appliances_0_2_9_18"));
+                    startActivity(intent);
+                }
+                else
+                {
+                    Intent intent = new Intent(Intent.ACTION_VIEW).setData(Uri.parse("https://www.amazon.in/gp/" +
+                            "goldbox?ref_=nav_cs_gb"));
+                    startActivity(intent);
+                }
+            }
+        };
+    }
 }

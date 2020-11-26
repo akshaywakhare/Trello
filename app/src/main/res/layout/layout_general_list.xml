@@ -1,21 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="#FFFFFF">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     >
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <TextView
-            android:id="@+id/text"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="xyz"
-            android:textSize="25sp" />
+            android:id="@+id/text"
+            android:textSize="25sp"
+            android:text="xyz" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,41 +21,38 @@
 
             <Button
                 android:id="@+id/decrease"
-                android:layout_width="46dp"
-                android:layout_height="match_parent"
-                android:background="#2B6F95"
-                android:backgroundTint="#add8e6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:onClick="decreaseInteger"
                 android:text="-"
-                android:textColor="#000000"
-                android:textColorLink="#293DA6"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:backgroundTint="#3192AE" />
+                android:backgroundTint="#add8e6"
+                android:textColor="#000000"/>
 
             <TextView
                 android:id="@+id/integer_number"
-                android:layout_width="25dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:text="0"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display4"
                 android:textColor="#000000"
-                android:textSize="25sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textSize="25sp" />
 
             <Button
                 android:id="@+id/increase"
-                android:layout_width="46dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#2B6F95"
-                android:backgroundTint="#add8e6"
                 android:onClick="increaseInteger"
                 android:text="+"
-                android:textColor="#000000"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:backgroundTint="#3192AE" />
+                android:backgroundTint="#add8e6"
+                android:textColor="#000000"/>
+
+            <Button
+                android:id="@+id/buynow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#add8e6"
+                android:text="Buy"
+                android:textColor="#000000" />
         </LinearLayout>
 
     </LinearLayout>

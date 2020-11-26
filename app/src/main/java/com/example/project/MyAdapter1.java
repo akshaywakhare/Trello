@@ -23,14 +23,17 @@ public class MyAdapter1  extends RecyclerView.Adapter<MyAdapter1.ViewHolder1> im
     private List<MyList1>myLists;
     private Context context;
     private List<MyList1>myListsAll;
+    private RecyclerViewClickListener listener;
     DocumentReference ref;
     String email,des;
     FirebaseFirestore db;
-    public MyAdapter1(List<MyList1> myLists, Context context,String email,String des) {
+    public MyAdapter1(List<MyList1> myLists, Context context, String email, String des,
+                      RecyclerViewClickListener listener) {
         this.myLists = myLists;
         this.context = context;
         this.email=email;
         this.des=des;
+        this.listener=listener;
         this.myListsAll=new ArrayList<>(myLists);
     }
     @NonNull
@@ -104,17 +107,27 @@ public class MyAdapter1  extends RecyclerView.Adapter<MyAdapter1.ViewHolder1> im
             notifyDataSetChanged();
         }
     };
-    public class ViewHolder1 extends RecyclerView.ViewHolder{
+    public class ViewHolder1 extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView text;
         private TextView no;
         private Button decrease;
         private Button increase;
+        private Button buynow;
         public ViewHolder1(@NonNull View itemView) {
             super(itemView);
             text=(TextView)itemView.findViewById(R.id.text);
             no=(TextView) itemView.findViewById(R.id.integer_number);
             decrease=(Button)itemView.findViewById(R.id.decrease);
             increase=(Button)itemView.findViewById(R.id.increase);
+            buynow=(Button)itemView.findViewById(R.id.buynow);
+            buynow.setOnClickListener(this);
         }
+        @Override
+        public void onClick(View v) {
+            listener.OnClick(v,getAdapterPosition());
+        }
+    }
+    public interface RecyclerViewClickListener{
+        void OnClick(View v,int position);
     }
 }

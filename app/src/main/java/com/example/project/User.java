@@ -10,14 +10,16 @@ public class User {
     String email;
     String password;
     String profession;
+    String phone;
     public User(){
     }
-    public User(String username, String email,String password,String profession)
+    public User(String username, String email,String password,String profession,String phone)
     {
         this.username=username;
         this.email=email;
         this.password=password;
         this.profession=profession;
+        this.phone=phone;
     }
     public String getusername(){
         return username;
@@ -36,5 +38,13 @@ public class User {
     }
     public String getprofession(){
         return profession;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getPhone() {
+        return phone;
     }
 }

@@ -1,12 +1,6 @@
 <resources>
     <string name="app_name">project</string>
-     <string name="app_logo" translatable="false">logo</string>
-    <string name="text_title" translatable="false">title</string>
-    <string name="text_hello" translatable="false">hello</string>
-    <string name="text_accounts" translatable="false">account</string>
-    <string name="error_message_email">Wrong Email</string>
-    <string name="error_valid_email_password">Wrong email or password</string>
-     <string name="already_a_member">Already a member</string>
+    <string name="already_a_member">Already a member</string>
     <string name="login">login</string>
     <string name="not_a_member">Not a member</string>
     <string name="password">password</string>
@@ -14,9 +8,4 @@
     <string name="open">open</string>
     <string name="close">close</string>
     <string name="help">Simply add, edit and delete your reminders. If you have any questions, go have a beer.</string>
-    <string name="error_password_match">Password match error</string>
-    <string name="error_message_name" />
-    <string name="error_message_password" />
-    <string name="success_message">Success</string>
-    <string name="error_email_exists">Email exists</string>
 </resources>
