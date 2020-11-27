@@ -123,7 +123,7 @@
             android:id="@+id/emptyTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hey"
+            android:text="Hey!"
             android:textColor="#EC5D5D"
             android:textSize="38dp"
             android:textStyle="normal" />
@@ -156,7 +156,7 @@
             android:paddingHorizontal="70dp"
             android:paddingVertical="15dp"
             android:text="Add New Task"
-            android:textColor="@drawable/radius_border_button_text" />
+            android:textColor="@color/call_background" />
 
     </LinearLayout>
 
@@ -168,6 +168,7 @@
         android:layout_margin="16dp"
         android:contentDescription="Add Task"
         android:onClick="openAddModifyTask"
-        android:src="@drawable/ic_baseline_add_24" />
+        android:src="@drawable/ic_baseline_add_24"
+        app:backgroundTint="#4547AA" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -43,6 +43,7 @@
 
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -54,11 +55,10 @@
             android:layout_above="@+id/custom_config"
             android:background="#FFFFFF"
             android:gravity="top"
+            android:hint="What are you planning?"
             android:inputType="textMultiLine"
             android:padding="20dp"
-            android:textColorHint="#CDD1D5"
-            android:hint="What are you planning?"/>
-
+            android:textColorHint="#CDD1D5" />
 
 
         <LinearLayout
@@ -67,24 +67,24 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/deleteTask"
             android:gravity="center"
+            android:onClick="chooseDate"
             android:orientation="horizontal"
             android:paddingHorizontal="30dp"
-            android:paddingVertical="20dp"
-            android:onClick="chooseDate">
+            android:paddingVertical="20dp">
 
             <ImageView
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:src="@drawable/ic_baseline_calendar_today_24"/>
+                android:src="@drawable/ic_baseline_calendar_today_24" />
 
             <TextView
                 android:id="@+id/dateText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:text="29/05/2020"
                 android:textSize="16dp"
-                android:textStyle="bold"
-                android:text="29/05/2020"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -94,10 +94,10 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/save_btn"
             android:gravity="center"
+            android:onClick="deleteTask"
             android:orientation="horizontal"
             android:paddingHorizontal="30dp"
-            android:paddingVertical="20dp"
-            android:onClick="deleteTask">
+            android:paddingVertical="20dp">
 
             <ImageView
                 android:layout_width="16dp"
@@ -109,26 +109,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:textSize="16dp"
-                android:textStyle="bold"
+                android:text="Delete Task"
                 android:textColor="#EC5D5D"
-                android:text="Delete Task"/>
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
 
         <Button
             android:id="@+id/save_btn"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_gravity="center"
-            style="?android:attr/borderlessButtonStyle"
+            android:layout_gravity="bottom|center"
+            android:layout_marginBottom="-5dp"
             android:background="#EC5D5D"
-            android:textColor="#FFFFFF"
-            android:paddingVertical="15dp"
             android:onClick="saveTask"
-            android:text="SAVE"/>
+            android:paddingVertical="15dp"
+            android:text="SAVE"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
 
     </RelativeLayout>
 

@@ -8,10 +8,11 @@
     android:layout_height="match_parent">
 
     <Button
-        style="@style/widget"
         android:id="@+id/add_task"
+        style="@style/widget"
+        android:onClick="onAddClick"
         android:text="New Task"
-        android:onClick="onAddClick" />
+        android:textSize="18sp" />
 
     <ListView
         style="@style/widget"

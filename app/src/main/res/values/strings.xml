@@ -7,5 +7,6 @@
     <string name="username">username</string>
     <string name="open">open</string>
     <string name="close">close</string>
+    <string name="app_logo">Trello</string>
     <string name="help">Simply add, edit and delete your reminders. If you have any questions, go have a beer.</string>
 </resources>
